@@ -2,7 +2,7 @@
     "name" : "Ubicast Screen Capturing",
     "author": "Stéphane Schoorens forked from Muaz Khan",
     "version" : "1",
-    "manifest_version" : 1,
+    "manifest_version" : 2,
     "minimum_chrome_version": "51",
     "description" : "Capture full-screen or specific application's screen on any ubicast domains",
     "homepage_url": "https://ubicast.tv/",
@@ -14,7 +14,7 @@
        "js": [ "content-script.js" ],
        "all_frames": true,
        "run_at": "document_end",
-       "matches": ["ubicast.tv*", "ubicast.eu*", "ubicast.net*", "*.ubicast.tv*", "*.ubicast.eu*", "*.ubicast.net*"]
+       "matches": ["*://ubicast.tv/*", "*://ubicast.eu/*", "*://ubicast.net/*", "*://*.ubicast.tv/*", "*://*.ubicast.eu/*", "*://*.ubicast.net/*", "*://localhost/*"]
     }],
     "icons" : {
         "48" : "icon.png"
