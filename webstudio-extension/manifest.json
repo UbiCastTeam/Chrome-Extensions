@@ -1,7 +1,7 @@
 {
     "name" : "Ubicast Screen Capturing",
     "author": "Stéphane Schoorens forked from Muaz Khan",
-    "version" : "1.0.1",
+    "version" : "1.0.2",
     "manifest_version" : 2,
     "minimum_chrome_version": "51",
     "description" : "Capture full-screen or specific application's screen on any ubicast domains",
@@ -14,7 +14,7 @@
        "js": [ "content-script.js" ],
        "all_frames": true,
        "run_at": "document_end",
-       "matches": ["*://*/*"]
+       "matches": ["<all_urls>"]
     }],
     "icons" : {
         "48" : "icon.png"
