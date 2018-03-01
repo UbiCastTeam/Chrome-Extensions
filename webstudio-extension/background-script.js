@@ -8,11 +8,11 @@ chrome.runtime.onConnect.addListener(function (port) {
     
     // this one is called for each message from "content-script.js"
     function portOnMessageHanlder(message) {
-        if(message == 'get-sourceId') {
+        if(message.captureSourceId) {
             chrome.desktopCapture.chooseDesktopMedia(screenOptions, port.sender.tab, onAccessApproved);
         }
 
-        if(message == 'audio-plus-tab') {
+        if(message.audioPlusTab) {
             screenOptions = ['audio', 'tab'];
             chrome.desktopCapture.chooseDesktopMedia(screenOptions, port.sender.tab, onAccessApproved);
         }
@@ -29,7 +29,7 @@ chrome.runtime.onConnect.addListener(function (port) {
         // "ok" button is clicked; share "sourceId" with the
         // content-script which will forward it to the webpage
         port.postMessage({
-            sourceId: sourceId
+            chromeMediaSourceId: sourceId
         });
     }
 });

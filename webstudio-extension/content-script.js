@@ -1,11 +1,4 @@
-﻿// this content-script plays role of medium to publish/subscribe messages from webpage to the background script
-
-// this object is used to make sure our extension isn't conflicted with irrelevant messages!
-var rtcmulticonnectionMessages = {
-    'are-you-there': true,
-    'get-sourceId':  true,
-    'audio-plus-tab': true
-};
+﻿/* globals chrome */
 
 // this port connects with background script
 var port = chrome.runtime.connect();
@@ -20,23 +13,21 @@ port.onMessage.addListener(function (message) {
 // it receives those messages and forwards to background script
 window.addEventListener('message', function (event) {
     // if invalid source
-    if (event.source != window)
+    if (event.source != window) {
         return;
-        
-    // it is 3rd party message
-    if(!rtcmulticonnectionMessages[event.data]) return;
+    }
         
     // if browser is asking whether extension is available
     if(event.data == 'are-you-there') {
-        window.postMessage('rtcmulticonnection-extension-loaded', '*');
+        window.postMessage('webstudio-extension-installed', '*');
     }
 
     // if it is something that need to be shared with background script
-    if(event.data == 'get-sourceId' || event.data === 'audio-plus-tab') {
+    if(event.data.captureSourceId || event.data.audioPlusTab) {
         // forward message to background script
         port.postMessage(event.data);
     }
 });
 
 // inform browser that you're available!
-window.postMessage('rtcmulticonnection-extension-loaded', '*');
+window.postMessage('webstudio-extension-installed', '*');
